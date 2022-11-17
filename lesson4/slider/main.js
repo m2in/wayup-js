@@ -26,6 +26,7 @@ const prepareCurrentSlider = int => {
 
 
 const nextSlide = () => {
+	makeTimer();//Пересоздаем интервал если производится нажатие 
 	if(index == (slides.length - 1)){
 		index = 0;
 		 prepareCurrentSlider(index);}
@@ -34,6 +35,7 @@ const nextSlide = () => {
 	prepareCurrentSlider(index);}
 }
 const prevSlide = () => {
+	makeTimer();//Пересоздаем интервал если производится нажатие 
 	if(index == 0){
 		index = slides.length - 1;
 		prepareCurrentSlider(index);
@@ -55,3 +57,10 @@ dots.forEach((item, indexDot) =>{
 
 next.addEventListener('click', nextSlide);
 prev.addEventListener('click', prevSlide);
+
+let timer = 0;
+ makeTimer(); //Создаем интервал 
+ function makeTimer(){
+    clearInterval(timer) //Очистим интервал, это позволит прервать его работу и отменить перелистывание
+    timer = setInterval(nextSlide,2000);
+  }
